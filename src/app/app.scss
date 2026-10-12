@@ -21,9 +21,9 @@ a {
 }
 
 .master-nav {
-  width: min(1200px, calc(100% - 2rem));
-  margin: 1rem auto 0;
-  padding: 0.9rem 1rem;
+  width: min(100%, calc(100% - 1rem));
+  margin: 0.75rem auto 0;
+  padding: 0.85rem 1.15rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -121,6 +121,7 @@ a {
   .master-nav {
     width: min(100%, calc(100% - 1rem));
     margin-top: 0.5rem;
+    padding-inline: 1rem;
     flex-direction: column;
     align-items: flex-start;
   }

@@ -1,7 +1,7 @@
 .screen-shell {
-  width: min(960px, calc(100% - 2rem));
+  width: min(100%, calc(100% - 1rem));
   margin: 0 auto;
-  padding: 1.5rem 0 2.5rem;
+  padding: 1.25rem 0 2.5rem;
   position: relative;
 }
 
@@ -22,12 +22,24 @@
 }
 
 .form-card {
-  padding: 1.2rem;
+  padding: 1.5rem;
 }
 
 .form-grid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.45rem;
+  color: #132033;
+  font-weight: 600;
+}
+
+.form-span-all {
+  grid-column: 1 / -1;
 }
 
 .form-alert {
@@ -137,10 +149,7 @@
 }
 
 label {
-  display: grid;
-  gap: 0.45rem;
-  color: #132033;
-  font-weight: 600;
+  min-width: 0;
 }
 
 input,
@@ -170,6 +179,11 @@ textarea:focus {
   align-items: center;
   gap: 0.75rem;
   margin-top: 0.5rem;
+}
+
+.actions .primary-button,
+.actions .ghost-link {
+  min-width: 10rem;
 }
 
 .primary-button,
@@ -230,8 +244,25 @@ textarea:focus {
     align-items: stretch;
   }
 
+  .screen-header {
+    gap: 0.75rem;
+  }
+
   .task-id-copy {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 1rem;
+  }
+
+  .actions .primary-button,
+  .actions .ghost-link {
+    min-width: 0;
   }
 }

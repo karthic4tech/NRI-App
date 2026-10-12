@@ -32,11 +32,11 @@ import { TaskStoreService } from './task-store.service';
       <section class="form-card card">
         <form [formGroup]="taskForm" (ngSubmit)="saveTask()" class="form-grid">
           @if (errorMessage()) {
-            <div class="form-alert" role="alert">{{ errorMessage() }}</div>
+            <div class="form-alert form-span-all" role="alert">{{ errorMessage() }}</div>
           }
 
           @if (savedTaskId()) {
-            <section class="task-id-panel" aria-label="Created task id">
+            <section class="task-id-panel form-span-all" aria-label="Created task id">
               <div>
                 <p class="task-id-label">Your Task ID</p>
                 <p class="task-id-help">Please copy this ID for future reference.</p>
@@ -52,22 +52,22 @@ import { TaskStoreService } from './task-store.service';
             </section>
           }
 
-          <label>
+          <label class="form-field">
             <span>Your name</span>
             <input formControlName="name" type="text" placeholder="Rahul" />
           </label>
 
-          <label>
+          <label class="form-field">
             <span>Task Title</span>
             <input formControlName="taskTitle" type="text" placeholder="Passport renewal" />
           </label>
 
-          <label>
+          <label class="form-field form-span-all">
             <span>Service Description</span>
             <textarea formControlName="serviceDescription" rows="4" placeholder="Describe the service you need in a few words."></textarea>
           </label>
 
-          <div class="actions">
+          <div class="actions form-span-all">
             <button type="submit" class="primary-button" [disabled]="taskForm.invalid || isSaving()">
               @if (isSaving()) {
                 Saving...

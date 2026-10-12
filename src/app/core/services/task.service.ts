@@ -40,7 +40,7 @@ export class TaskService {
   }
 
   async getTasks(): Promise<TaskRecord[]> {
-    return await this.invokeTaskFunction<TaskRecord[]>('', { method: 'GET' });
+    return await this.invokeTaskFunction<TaskRecord[]>('?limit=10', { method: 'GET' });
   }
 
   async createTask(input: CreateTaskInput): Promise<TaskRecord> {

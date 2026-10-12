@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -22,7 +22,7 @@ import { TaskService, type TaskRecord } from '../core/services/task.service';
         <div class="task-search-copy">
           <p class="eyebrow">Find your Task details</p>
           <h3>Search by Task ID</h3>
-          <p class="muted">Enter your Task ID to view the saved request details and copy them easily.</p>
+          <p class="muted">Enter your Task ID to view the saved request details.</p>
         </div>
 
         <form [formGroup]="searchForm" (ngSubmit)="searchTask()" class="task-search-form">
@@ -96,46 +96,73 @@ import { TaskService, type TaskRecord } from '../core/services/task.service';
           <h3>Unable to load tasks</h3>
           <p class="muted">{{ errorMessage() }}</p>
         } @else {
-          <h3>{{ tasks().length }} tasks from Supabase</h3>
-          <p class="muted">Loaded directly from your tasks table.</p>
+          <h3>Top 10 latest tasks</h3>
+          <p class="muted">Showing the newest tasks from Supabase in a grid view.</p>
         }
       </section>
 
       <section class="task-list card">
         @if (loading()) {
-          <article class="task-row task-row--loading" aria-busy="true">
+          <article class="task-status-card task-status-card--loading" aria-busy="true">
             <div>
               <p class="task-title">Loading your task list…</p>
               <p class="muted">Please wait while we sync the latest records.</p>
             </div>
           </article>
         } @else if (errorMessage()) {
-          <article class="task-row task-row--error">
+          <article class="task-status-card task-status-card--error">
             <div>
               <p class="task-title">Unable to load tasks</p>
               <p class="muted">{{ errorMessage() }}</p>
             </div>
           </article>
         } @else {
-          @for (task of tasks(); track task.TaskId) {
-            <article class="task-row">
-              <div>
-                <p class="task-title">{{ task.Name }} — Task #{{ task.TaskId }} - {{ task.TaskTitle }}</p>
-                <p class="muted">{{ task.ServiceDescription }}</p>
-              </div>
-
-              <div class="task-meta">
-                <small>{{ task.UpdatedAt }}</small>
-              </div>
-            </article>
-          } @empty {
-            <article class="task-row">
-              <div>
-                <p class="task-title">No tasks yet</p>
-                <p class="muted">Create a task to see it listed here.</p>
-              </div>
-            </article>
-          }
+          <div class="task-table-wrap">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Task ID</th>
+                  <th>Name</th>
+                  <th>Task Title</th>
+                  <th>Service Description</th>
+                  <th>Updated At</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (task of topTasks(); track task.TaskId) {
+                  <tr>
+                    <td>
+                      <span class="task-id-chip">Task #{{ task.TaskId }}</span>
+                    </td>
+                    <td class="task-cell-strong">{{ task.Name }}</td>
+                    <td class="task-cell-accent">{{ task.TaskTitle }}</td>
+                    <td>{{ task.ServiceDescription }}</td>
+                    <td>
+                      <span class="task-date">{{ task.UpdatedAt }}</span>
+                    </td>
+                    <td>
+                      <button type="button" class="task-copy-button" (click)="copyTaskId(task.TaskId)">
+                        <i class="bi bi-clipboard me-2" aria-hidden="true"></i>
+                        {{ copiedTaskId() === task.TaskId ? 'Copied' : 'Copy ID' }}
+                      </button>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="6">
+                      <div class="task-status-card task-status-card--empty">
+                        <div>
+                          <p class="task-title">No tasks yet</p>
+                          <p class="muted">Create a task to see it listed here.</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
         }
       </section>
     </main>
@@ -147,12 +174,14 @@ export class TasksPageComponent implements OnInit {
   private readonly taskService = inject(TaskService);
 
   protected readonly tasks = signal<TaskRecord[]>([]);
+  protected readonly topTasks = computed(() => this.tasks().slice(0, 10));
   protected readonly loading = signal(true);
   protected readonly errorMessage = signal('');
   protected readonly searching = signal(false);
   protected readonly searchError = signal('');
   protected readonly searchedTask = signal<TaskRecord | null>(null);
   protected readonly copiedSearchTaskId = signal(false);
+  protected readonly copiedTaskId = signal('');
 
   protected readonly searchForm = this.fb.group({
     taskId: ['', Validators.required],
@@ -215,5 +244,19 @@ export class TasksPageComponent implements OnInit {
     await navigator.clipboard.writeText(taskId);
     this.copiedSearchTaskId.set(true);
     setTimeout(() => this.copiedSearchTaskId.set(false), 1500);
+  }
+
+  async copyTaskId(taskId: string): Promise<void> {
+    if (!taskId || !navigator.clipboard) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(taskId);
+    this.copiedTaskId.set(taskId);
+    setTimeout(() => {
+      if (this.copiedTaskId() === taskId) {
+        this.copiedTaskId.set('');
+      }
+    }, 1500);
   }
 }
