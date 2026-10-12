@@ -1,0 +1,130 @@
+:host {
+  display: block;
+}
+
+.screen-shell {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 2.5rem;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #5c6b84;
+}
+
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.muted {
+  color: #5c6b84;
+  line-height: 1.5;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 160, 196, 0.22);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(23, 40, 74, 0.08);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.summary-card,
+.panel {
+  padding: 1.2rem;
+}
+
+.screen-header .primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #294cf2 0%, #1737c9 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.panel-header,
+.payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panel-header {
+  margin-bottom: 1rem;
+}
+
+.payment-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.payment-row {
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: #f8fbff;
+  border: 1px solid rgba(139, 160, 196, 0.16);
+}
+
+.payment-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.task-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: #e8efff;
+  color: #2342a7;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .screen-header,
+  .panel-header,
+  .payment-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
