@@ -2,22 +2,22 @@ import { Injectable, computed, signal } from '@angular/core';
 
 export interface TaskRecord {
   id: string;
+  name: string;
   title: string;
-  service: string;
-  status: string;
+  serviceDescription: string;
   updatedAt: string;
 }
 
 export interface CreateTaskInput {
+  name: string;
   title: string;
-  service: string;
-  status: string;
+  serviceDescription: string;
 }
 
 const initialTasks: TaskRecord[] = [
-  { id: '1042', title: 'Passport renewal', service: 'Awaiting evidence review', status: 'Needs attention', updatedAt: '10 min ago' },
-  { id: '1038', title: 'Address proof', service: 'Awaiting quotation approval', status: 'Action required', updatedAt: '1 hour ago' },
-  { id: '1021', title: 'PAN update', service: 'In progress', status: 'Partner assigned', updatedAt: 'Today' },
+  { id: '1042', name: 'Rahul', title: 'Passport renewal', serviceDescription: 'Awaiting evidence review', updatedAt: '10 min ago' },
+  { id: '1038', name: 'Priya', title: 'Address proof', serviceDescription: 'Awaiting quotation approval', updatedAt: '1 hour ago' },
+  { id: '1021', name: 'Arun', title: 'PAN update', serviceDescription: 'In progress', updatedAt: 'Today' },
 ];
 
 @Injectable({ providedIn: 'root' })
@@ -30,9 +30,9 @@ export class TaskStoreService {
   addTask(input: CreateTaskInput): TaskRecord {
     const task: TaskRecord = {
       id: String(this.nextTaskId()),
+      name: input.name,
       title: input.title,
-      service: input.service,
-      status: input.status,
+      serviceDescription: input.serviceDescription,
       updatedAt: 'Just now',
     };
 

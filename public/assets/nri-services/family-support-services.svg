@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Adult child supporting elderly parents in India">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#e6efff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="url(#bg)"/>
+  <circle cx="804" cy="118" r="58" fill="#d8efff"/>
+  <g transform="translate(120 164)">
+    <rect x="0" y="120" width="720" height="180" rx="40" fill="#ffffff"/>
+    <path d="M76 164h140" stroke="#2740d0" stroke-width="14" stroke-linecap="round" opacity="0.25"/>
+    <path d="M76 202h190" stroke="#1cc7b3" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+    <path d="M76 240h120" stroke="#2740d0" stroke-width="14" stroke-linecap="round" opacity="0.25"/>
+    <circle cx="516" cy="42" r="84" fill="#e8efff"/>
+    <path d="M472 42a44 44 0 0 1 88 0c0 26-44 56-44 56s-44-30-44-56Z" fill="#1cc7b3" opacity="0.9"/>
+    <circle cx="190" cy="96" r="56" fill="#2740d0" opacity="0.12"/>
+    <circle cx="190" cy="82" r="28" fill="#2740d0" opacity="0.65"/>
+    <path d="M132 160c16-38 44-58 58-58s42 20 58 58" fill="#294cf2" opacity="0.22"/>
+    <circle cx="340" cy="96" r="56" fill="#e8efff"/>
+    <circle cx="340" cy="82" r="28" fill="#1cc7b3" opacity="0.85"/>
+    <path d="M282 160c16-38 44-58 58-58s42 20 58 58" fill="#1cc7b3" opacity="0.26"/>
+    <path d="M262 214c26-54 62-80 112-80s86 26 112 80" fill="none" stroke="#2740d0" stroke-width="14" stroke-linecap="round"/>
+    <path d="M372 184l42-42 42 42" fill="none" stroke="#1cc7b3" stroke-width="12" stroke-linejoin="round"/>
+  </g>
+</svg>

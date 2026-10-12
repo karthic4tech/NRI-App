@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Tax documents and international repatriation transfer concept">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#e0ecff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="url(#bg)"/>
+  <circle cx="784" cy="116" r="56" fill="#d8efff"/>
+  <g transform="translate(104 132)">
+    <rect x="20" y="48" width="280" height="300" rx="28" fill="#ffffff"/>
+    <rect x="50" y="88" width="160" height="20" rx="10" fill="#e8efff"/>
+    <rect x="50" y="126" width="210" height="20" rx="10" fill="#e8efff"/>
+    <rect x="50" y="164" width="178" height="20" rx="10" fill="#e8efff"/>
+    <rect x="50" y="202" width="200" height="20" rx="10" fill="#e8efff"/>
+    <rect x="50" y="252" width="114" height="34" rx="17" fill="#2740d0"/>
+    <path d="M222 80h46v46" fill="none" stroke="#1cc7b3" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M268 80 218 130" fill="none" stroke="#1cc7b3" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(474 140)">
+    <rect x="0" y="0" width="382" height="242" rx="34" fill="#ffffff"/>
+    <circle cx="110" cy="120" r="58" fill="#e8efff"/>
+    <path d="M84 120h52M110 94v52" stroke="#2740d0" stroke-width="12" stroke-linecap="round"/>
+    <path d="M188 120h102" stroke="#1cc7b3" stroke-width="12" stroke-linecap="round"/>
+    <path d="M258 92l32 28-32 28" fill="none" stroke="#1cc7b3" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="220" y="158" width="82" height="38" rx="19" fill="#294cf2" opacity="0.16"/>
+    <rect x="222" y="88" width="114" height="26" rx="13" fill="#e8efff"/>
+  </g>
+  <path d="M170 482c120-54 216-54 320 0 104 54 218 54 300 0" fill="none" stroke="#1cc7b3" stroke-width="16" stroke-linecap="round"/>
+  <path d="M188 530h224" stroke="#2740d0" stroke-width="16" stroke-linecap="round" opacity="0.3"/>
+</svg>

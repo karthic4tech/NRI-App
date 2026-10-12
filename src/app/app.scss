@@ -50,9 +50,14 @@ a {
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 14px;
-  background: linear-gradient(180deg, #294cf2 0%, #1737c9 100%);
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
   color: #fff;
   font-size: 1rem;
+}
+
+.brand-mark i {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .brand-text {
@@ -72,16 +77,43 @@ a {
   text-decoration: none;
   color: #2342a7;
   font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .master-nav-links a.is-active {
-  background: #e8efff;
-  color: #1737c9;
+  background: #e6f7fb;
+  color: #1f6f8b;
 }
 
 .master-nav-links a:hover,
 .master-nav-links a:focus-visible {
-  background: rgba(232, 239, 255, 0.7);
+  background: rgba(230, 247, 251, 0.85);
+  box-shadow: 0 0 0 3px rgba(39, 130, 164, 0.16);
+  outline: none;
+}
+
+.master-nav-links a i {
+  font-size: 0.92rem;
+}
+
+.master-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(39, 130, 164, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.master-nav-cta:hover,
+.master-nav-cta:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(39, 130, 164, 0.3);
   outline: none;
 }
 
@@ -94,6 +126,10 @@ a {
   }
 
   .master-nav-links {
+    width: 100%;
+  }
+
+  .master-nav-cta {
     width: 100%;
   }
 }

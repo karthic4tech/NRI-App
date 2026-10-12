@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Modern Indian home with property management checklist">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#e2ecff"/>
+    </linearGradient>
+    <linearGradient id="house" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#294cf2"/>
+      <stop offset="100%" stop-color="#1737c9"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="url(#bg)"/>
+  <circle cx="790" cy="120" r="58" fill="#d8efff"/>
+  <rect x="74" y="104" width="256" height="150" rx="28" fill="#ffffff" opacity="0.92"/>
+  <path d="M112 150h180M112 186h126M112 222h156" stroke="#2740d0" stroke-width="14" stroke-linecap="round" opacity="0.45"/>
+  <rect x="58" y="414" width="844" height="126" rx="40" fill="#dce8ff"/>
+  <path d="M110 422c132-42 258-42 390 0s258 42 390 0v118H110Z" fill="#c7d8ff"/>
+  <g transform="translate(306 164)">
+    <path d="M154 46 36 138v168h236V138Z" fill="#ffffff"/>
+    <path d="M154 46 36 138h236Z" fill="#1cc7b3" opacity="0.95"/>
+    <path d="M118 176h72v130h-72z" fill="url(#house)"/>
+    <rect x="70" y="172" width="34" height="44" rx="10" fill="#e8efff"/>
+    <rect x="204" y="172" width="34" height="44" rx="10" fill="#e8efff"/>
+    <rect x="170" y="216" width="34" height="90" rx="12" fill="#ffffff"/>
+    <circle cx="134" cy="216" r="8" fill="#fff"/>
+    <circle cx="142" cy="214" r="8" fill="#fff"/>
+    <circle cx="150" cy="218" r="8" fill="#fff"/>
+  </g>
+  <g transform="translate(638 208)">
+    <rect x="0" y="0" width="198" height="212" rx="28" fill="#ffffff"/>
+    <rect x="28" y="28" width="96" height="18" rx="9" fill="#e8efff"/>
+    <rect x="28" y="62" width="140" height="18" rx="9" fill="#e8efff"/>
+    <rect x="28" y="96" width="120" height="18" rx="9" fill="#e8efff"/>
+    <rect x="28" y="130" width="150" height="18" rx="9" fill="#e8efff"/>
+    <path d="M132 30l20 20 38-40" fill="none" stroke="#1cc7b3" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 176h96" stroke="#2740d0" stroke-width="12" stroke-linecap="round" opacity="0.35"/>
+  </g>
+</svg>

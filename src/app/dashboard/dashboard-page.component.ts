@@ -72,11 +72,10 @@ interface ActivityItem {
             @for (task of activeTasks(); track task.id) {
               <div class="task-row">
                 <div>
-                  <p class="task-title">Task #{{ task.id }} - {{ task.title }}</p>
-                  <p class="muted">{{ task.service }}</p>
+                  <p class="task-title">{{ task.name }} — Task #{{ task.id }} - {{ task.title }}</p>
+                  <p class="muted">{{ task.serviceDescription }}</p>
                 </div>
                 <div class="task-meta">
-                  <span class="status-pill">{{ task.status }}</span>
                   <small>{{ task.updatedAt }}</small>
                 </div>
               </div>

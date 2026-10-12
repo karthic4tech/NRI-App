@@ -2,6 +2,7 @@
   width: min(960px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.5rem 0 2.5rem;
+  position: relative;
 }
 
 .screen-header {
@@ -29,6 +30,112 @@
   gap: 1rem;
 }
 
+.form-alert {
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(39, 130, 164, 0.2);
+  background: rgba(230, 247, 251, 0.8);
+  color: #1f6f8b;
+  font-weight: 600;
+}
+
+.form-alert--success {
+  background: rgba(19, 184, 166, 0.1);
+  border-color: rgba(19, 184, 166, 0.2);
+  color: #0f7f73;
+}
+
+.task-id-panel {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(19, 184, 166, 0.2);
+  background: rgba(230, 247, 251, 0.55);
+}
+
+.task-id-label {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5c6b84;
+}
+
+.task-id-help {
+  margin: 0.2rem 0 0;
+  color: #1f6f8b;
+  font-weight: 600;
+}
+
+.task-id-copy {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.task-id-copy input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(39, 130, 164, 0.22);
+  background: rgba(255, 255, 255, 0.92);
+  color: #10233f;
+  font-weight: 700;
+}
+
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(39, 130, 164, 0.22);
+}
+
+.copy-button:hover,
+.copy-button:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+  box-shadow: 0 16px 28px rgba(39, 130, 164, 0.3);
+}
+
+.task-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1100;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: min(22rem, calc(100vw - 2rem));
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(19, 184, 166, 0.98) 0%, rgba(31, 111, 139, 0.98) 100%);
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(23, 40, 74, 0.2);
+}
+
+.task-toast i {
+  font-size: 1.15rem;
+  margin-top: 0.1rem;
+}
+
+.task-toast strong,
+.task-toast p {
+  display: block;
+}
+
+.task-toast p {
+  margin: 0.15rem 0 0;
+  color: rgba(255, 255, 255, 0.92);
+}
+
 label {
   display: grid;
   gap: 0.45rem;
@@ -36,7 +143,8 @@ label {
   font-weight: 600;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   border: 1px solid rgba(139, 160, 196, 0.35);
   border-radius: 14px;
@@ -46,9 +154,15 @@ input {
   color: #132033;
 }
 
-input:focus {
-  outline: 3px solid rgba(41, 76, 242, 0.18);
-  border-color: #294cf2;
+textarea {
+  resize: vertical;
+  min-height: 7.5rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: 3px solid rgba(19, 184, 166, 0.18);
+  border-color: #2782a4;
 }
 
 .actions {
@@ -68,10 +182,18 @@ input:focus {
 .primary-button {
   border: 0;
   padding: 0.9rem 1.1rem;
-  background: linear-gradient(180deg, #294cf2 0%, #1737c9 100%);
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
   color: #fff;
   font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 12px 24px rgba(39, 130, 164, 0.22);
+}
+
+.primary-button:hover,
+.primary-button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(39, 130, 164, 0.3);
+  outline: none;
 }
 
 .primary-button:disabled {
@@ -86,14 +208,29 @@ input:focus {
   justify-content: center;
   padding: 0.9rem 1.1rem;
   text-decoration: none;
-  color: #2342a7;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(139, 160, 196, 0.22);
+  color: #1f6f8b;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 250, 252, 0.95) 100%);
+  border: 1px solid rgba(39, 130, 164, 0.2);
+}
+
+.ghost-link:hover,
+.ghost-link:focus-visible,
+.secondary-link:hover,
+.secondary-link:focus-visible {
+  color: #1f6f8b;
+  border-color: rgba(19, 184, 166, 0.35);
+  box-shadow: 0 12px 24px rgba(23, 40, 74, 0.08);
+  outline: none;
 }
 
 @media (max-width: 640px) {
   .screen-header,
   .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-id-copy {
     flex-direction: column;
     align-items: stretch;
   }

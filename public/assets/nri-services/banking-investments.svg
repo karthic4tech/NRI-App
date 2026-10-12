@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-label="Banking and investment planning dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#e5efff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="640" fill="url(#bg)"/>
+  <circle cx="804" cy="112" r="58" fill="#d8efff"/>
+  <g transform="translate(82 100)">
+    <rect x="0" y="0" width="340" height="400" rx="34" fill="#ffffff"/>
+    <rect x="34" y="34" width="132" height="20" rx="10" fill="#e8efff"/>
+    <rect x="34" y="76" width="270" height="220" rx="24" fill="#f2f6ff"/>
+    <path d="M74 256c28-56 62-82 104-82 38 0 64 16 110 72" fill="none" stroke="#2740d0" stroke-width="12" stroke-linecap="round"/>
+    <path d="M74 214h218" stroke="#1cc7b3" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+    <rect x="34" y="330" width="104" height="24" rx="12" fill="#e8efff"/>
+  </g>
+  <g transform="translate(476 122)">
+    <rect x="0" y="0" width="370" height="340" rx="34" fill="#ffffff"/>
+    <rect x="32" y="34" width="126" height="20" rx="10" fill="#e8efff"/>
+    <rect x="32" y="78" width="84" height="182" rx="18" fill="#e8efff"/>
+    <rect x="132" y="112" width="84" height="148" rx="18" fill="#dce8ff"/>
+    <rect x="232" y="60" width="84" height="200" rx="18" fill="#cfe7ff"/>
+    <path d="M74 118v122M174 152v88M274 92v148" stroke="#2740d0" stroke-width="12" stroke-linecap="round"/>
+    <path d="M56 72h52" stroke="#1cc7b3" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

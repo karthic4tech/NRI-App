@@ -1,0 +1,8 @@
+{
+  "name": "nri-app",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist/nri-customer-web-app/browser",
+    "not_found_handling": "single-page-application"
+  }
+}

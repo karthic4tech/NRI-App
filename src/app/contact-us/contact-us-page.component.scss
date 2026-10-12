@@ -1,0 +1,135 @@
+:host {
+  display: block;
+}
+
+.contact-shell {
+  background: radial-gradient(circle at top left, rgba(39, 130, 164, 0.1), transparent 30%), linear-gradient(180deg, #f6f8ff 0%, #eef3fb 100%);
+}
+
+.text-navy {
+  color: #10233f;
+}
+
+.text-teal {
+  color: #13b8a6;
+}
+
+.eyebrow {
+  letter-spacing: 0.14em;
+  color: #5c6b84;
+  font-size: 0.8rem;
+}
+
+.contact-hero,
+.contact-details,
+.contact-card,
+.contact-mini-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.contact-card,
+.contact-mini-card {
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px rgba(23, 40, 74, 0.08);
+}
+
+.nri-btn-primary,
+.nri-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border-radius: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nri-btn-primary {
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(39, 130, 164, 0.22);
+}
+
+.nri-btn-secondary {
+  background: linear-gradient(180deg, #ffffff 0%, #f1fafc 100%);
+  color: #1f6f8b;
+  border: 1px solid rgba(39, 130, 164, 0.22);
+}
+
+.nri-btn-primary:hover,
+.nri-btn-primary:focus-visible,
+.nri-btn-secondary:hover,
+.nri-btn-secondary:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.contact-hero,
+.contact-details {
+  border: 0;
+}
+
+.contact-card-wrap {
+  min-height: 100%;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 1rem;
+  background: #f8fbff;
+  border: 1px solid rgba(139, 160, 196, 0.16);
+}
+
+.contact-label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5c6b84;
+  margin-bottom: 0.15rem;
+}
+
+.contact-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: rgba(19, 184, 166, 0.08);
+  color: #1f6f8b;
+  font-weight: 600;
+}
+
+.nri-icon-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.95rem;
+  background: linear-gradient(180deg, #eef9fb 0%, #dff2f7 100%);
+}
+
+.nri-icon-btn-soft i {
+  color: #13b8a6;
+}
+
+.contact-mini-card {
+  padding: 1.2rem;
+  border: 1px solid rgba(139, 160, 196, 0.16);
+}
+
+.contact-mini-card i {
+  font-size: 1.35rem;
+}
+
+@media (max-width: 991.98px) {
+  .contact-card-wrap {
+    padding-top: 0;
+  }
+}
