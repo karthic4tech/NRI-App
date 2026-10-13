@@ -44,7 +44,7 @@ import { RouterLink } from '@angular/router';
                   <i class="bi bi-house-door-fill text-teal" aria-hidden="true"></i>
                   <div>
                     <span class="contact-label">Address</span>
-                    <p class="mb-0 text-secondary">NRI Services Hub, 12 Anna Salai, Chennai, Tamil Nadu 600002, India</p>
+                    <p class="mb-0 text-secondary">24/7 NRI Services Hub, 12 Anna Salai, Chennai, Tamil Nadu 600002, India</p>
                   </div>
                 </div>
 

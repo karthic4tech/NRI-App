@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+
+import { AuthService } from '../core/services/auth.service';
 import { TaskStoreService } from '../tasks/task-store.service';
 
 interface SummaryCard {
@@ -17,17 +19,31 @@ interface ActivityItem {
 @Component({
   selector: 'app-dashboard-page',
   imports: [RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <main class="shell">
       <header class="topbar">
         <div>
-          <p class="eyebrow">NRI Services App</p>
+          <p class="eyebrow">24/7 NRI Services App</p>
           <h1>NRI Customer Dashboard</h1>
         </div>
 
         <div class="topbar-actions">
-          <button type="button" class="ghost-button">Notifications</button>
-          <button type="button" class="profile-button">{{ userName }}</button>
+          @if (authService.user(); as user) {
+            <div class="user-card">
+              @if (avatarUrl(user)) {
+                <img [src]="avatarUrl(user)" [alt]="displayName(user) + ' profile photo'" class="user-avatar" />
+              } @else {
+                <span class="user-avatar user-avatar--fallback" aria-hidden="true">{{ initials(user) }}</span>
+              }
+
+              <div class="user-card-copy">
+                <strong>{{ displayName(user) }}</strong>
+                <span>{{ user.email ?? 'Signed in user' }}</span>
+              </div>
+            </div>
+          }
+          <button type="button" class="ghost-button" (click)="signOut()">Sign out</button>
         </div>
       </header>
 
@@ -110,9 +126,9 @@ interface ActivityItem {
   styleUrl: './dashboard-page.component.scss',
 })
 export class DashboardPageComponent {
+  protected readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   private readonly taskStore = inject(TaskStoreService);
-
-  protected readonly userName = 'Rahul';
 
   protected readonly summaryCards: SummaryCard[] = [
     { label: 'Draft tasks', value: '01', note: 'Waiting to be submitted' },
@@ -135,4 +151,38 @@ export class DashboardPageComponent {
     { title: 'Settlement pending for Task #1042', detail: 'Payment will be released after approval.', time: 'Today' },
     { title: 'Partner assigned to Task #1038', detail: 'Task partner accepted the assignment.', time: 'Today' },
   ];
+
+  async signOut(): Promise<void> {
+    try {
+      await this.authService.signOut();
+    } finally {
+      await this.router.navigateByUrl('/', { replaceUrl: true });
+    }
+  }
+
+  displayName(user: { email?: string | null; user_metadata?: Record<string, unknown> | null }): string {
+    const metadata = user.user_metadata ?? {};
+    const fullName = typeof metadata['full_name'] === 'string' ? metadata['full_name'] : undefined;
+    const name = typeof metadata['name'] === 'string' ? metadata['name'] : undefined;
+
+    return fullName ?? name ?? user.email?.split('@')[0] ?? 'Account';
+  }
+
+  avatarUrl(user: { user_metadata?: Record<string, unknown> | null }): string | null {
+    const metadata = user.user_metadata ?? {};
+    const avatar = metadata['avatar_url'] ?? metadata['picture'];
+
+    return typeof avatar === 'string' && avatar.length > 0 ? avatar : null;
+  }
+
+  initials(user: { email?: string | null; user_metadata?: Record<string, unknown> | null }): string {
+    const displayName = this.displayName(user);
+    const parts = displayName.trim().split(/\s+/).filter(Boolean);
+
+    if (parts.length === 0) {
+      return 'A';
+    }
+
+    return parts.slice(0, 2).map((part) => part[0]?.toUpperCase() ?? '').join('');
+  }
 }

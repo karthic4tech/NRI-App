@@ -18,6 +18,11 @@ type CreateTaskPayload = {
   serviceDescription?: unknown;
 };
 
+type AuthenticatedUser = {
+  id: string;
+  email: string | null;
+};
+
 const MAX_NAME_LENGTH = 200;
 const MAX_TITLE_LENGTH = 300;
 const MAX_DESCRIPTION_LENGTH = 1000;
@@ -52,6 +57,26 @@ const adminClient = createClient(supabaseUrl, tasksSecretKey, {
 
 const rateLimitByIp = new Map<string, { count: number; resetAt: number }>();
 
+async function getAuthenticatedUser(request: Request): Promise<AuthenticatedUser | null> {
+  const authHeader = request.headers.get('authorization') ?? '';
+  const token = authHeader.toLowerCase().startsWith('bearer ') ? authHeader.slice(7).trim() : '';
+
+  if (!token) {
+    return null;
+  }
+
+  const { data, error } = await adminClient.auth.getUser(token);
+
+  if (error || !data.user) {
+    return null;
+  }
+
+  return {
+    id: data.user.id,
+    email: data.user.email ?? null,
+  };
+}
+
 Deno.serve(async (request) => {
   const origin = request.headers.get('origin');
 
@@ -76,14 +101,20 @@ Deno.serve(async (request) => {
     return withCorsHeaders(jsonResponse({ error: 'Too many requests. Please try again later.' }, 429), origin);
   }
 
+  const user = await getAuthenticatedUser(request);
+  if (!user) {
+    return withCorsHeaders(jsonResponse({ error: 'Authentication required.' }, 401), origin);
+  }
+
   if (request.method === 'GET') {
     const taskId = new URL(request.url).searchParams.get('taskId')?.trim();
 
     if (taskId) {
       const { data, error } = await adminClient
         .from('tasks')
-        .select('TaskIdentity, TaskId, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
+        .select('TaskIdentity, TaskId, UserId, UserEmail, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
         .eq('TaskId', taskId)
+        .eq('UserId', user.id)
         .maybeSingle();
 
       if (error) {
@@ -95,7 +126,8 @@ Deno.serve(async (request) => {
 
     const { data, error } = await adminClient
       .from('tasks')
-      .select('TaskIdentity, TaskId, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
+      .select('TaskIdentity, TaskId, UserId, UserEmail, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
+      .eq('UserId', user.id)
       .order('CreatedAt', { ascending: false })
       .limit(100);
 
@@ -126,13 +158,15 @@ Deno.serve(async (request) => {
   }
 
   const { data, error } = await adminClient
-      .from('tasks')
+    .from('tasks')
     .insert({
+      UserId: user.id,
+      UserEmail: user.email ?? '',
       Name: normalizeText(String(body.name)),
       TaskTitle: normalizeText(String(body.taskTitle)),
       ServiceDescription: normalizeText(String(body.serviceDescription)),
     })
-    .select('TaskIdentity, TaskId, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
+    .select('TaskIdentity, TaskId, UserId, UserEmail, Name, TaskTitle, ServiceDescription, CreatedAt, UpdatedAt')
     .single();
 
   if (error) {

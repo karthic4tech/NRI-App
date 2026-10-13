@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
+import { AuthService } from '../core/services/auth.service';
 import { TaskService } from '../core/services/task.service';
 import { TaskStoreService } from './task-store.service';
 
@@ -83,8 +84,9 @@ import { TaskStoreService } from './task-store.service';
   `,
   styleUrl: './create-task-page.component.scss',
 })
-export class CreateTaskPageComponent {
+export class CreateTaskPageComponent implements OnInit {
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly authService = inject(AuthService);
   private readonly taskService = inject(TaskService);
   private readonly taskStore = inject(TaskStoreService);
 
@@ -99,6 +101,19 @@ export class CreateTaskPageComponent {
     taskTitle: ['', Validators.required],
     serviceDescription: ['', Validators.required],
   });
+
+  async ngOnInit(): Promise<void> {
+    const user = await this.authService.getCurrentUser();
+    const displayName = user?.user_metadata && typeof user.user_metadata['full_name'] === 'string'
+      ? String(user.user_metadata['full_name'])
+      : user?.user_metadata && typeof user.user_metadata['name'] === 'string'
+        ? String(user.user_metadata['name'])
+        : user?.email?.split('@')[0] ?? '';
+
+    if (displayName) {
+      this.taskForm.controls.name.setValue(displayName);
+    }
+  }
 
   async saveTask(): Promise<void> {
     if (this.taskForm.invalid) {

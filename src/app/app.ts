@@ -1,40 +1,100 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
+
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
   imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="app-shell">
-      <header class="master-nav" aria-label="Primary">
-        <a class="brand" routerLink="/" aria-label="NRI Services home">
-          <span class="brand-mark" aria-hidden="true">
-            <i class="bi bi-house-heart-fill"></i>
-          </span>
-          <span class="brand-text">NRI Services</span>
-        </a>
+      @if (showChrome()) {
+        <header class="master-nav" aria-label="Primary">
+          <a class="brand" routerLink="/" aria-label="24/7 NRI Services home">
+            <span class="brand-mark" aria-hidden="true">
+              <i class="bi bi-house-heart-fill"></i>
+            </span>
+            <span class="brand-text">24/7 NRI Services</span>
+          </a>
 
-        <nav class="master-nav-links">
-          <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
-            <i class="bi bi-grid-1x2-fill me-2" aria-hidden="true"></i>Services
-          </a>
-          <a routerLink="/tasks" routerLinkActive="is-active">
-            <i class="bi bi-list-check me-2" aria-hidden="true"></i>Tasks
-          </a>
-          <a routerLink="/contact" routerLinkActive="is-active">
-            <i class="bi bi-envelope-paper-heart me-2" aria-hidden="true"></i>Contact
-          </a>
-        </nav>
+          <nav class="master-nav-links">
+            <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="bi bi-grid-1x2-fill me-2" aria-hidden="true"></i>Services
+            </a>
+            <a routerLink="/tasks" routerLinkActive="is-active">
+              <i class="bi bi-list-check me-2" aria-hidden="true"></i>Tasks
+            </a>
+            <a routerLink="/contact" routerLinkActive="is-active">
+              <i class="bi bi-envelope-paper-heart me-2" aria-hidden="true"></i>Contact
+            </a>
 
-        <a class="master-nav-cta" routerLink="/tasks/new">
-          <i class="bi bi-chat-dots-fill me-2" aria-hidden="true"></i>Request a Service
-        </a>
-      </header>
+            @if (authService.user(); as user) {
+              <a routerLink="/dashboard" routerLinkActive="is-active">
+                <i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>Dashboard
+              </a>
+              <span class="master-nav-user" [title]="user.email ?? 'Signed in user'">
+                <i class="bi bi-person-circle me-2" aria-hidden="true"></i>
+                {{ displayName(user) }}
+              </span>
+              <button type="button" class="master-nav-button" (click)="signOut()">Sign out</button>
+            } @else {
+              <a routerLink="/login" routerLinkActive="is-active">
+                <i class="bi bi-person-check me-2" aria-hidden="true"></i>Login
+              </a>
+              <a routerLink="/register" routerLinkActive="is-active">
+                <i class="bi bi-person-plus me-2" aria-hidden="true"></i>Register
+              </a>
+            }
+          </nav>
+
+          <a class="master-nav-cta" routerLink="/consultation">
+            <i class="bi bi-chat-dots-fill me-2" aria-hidden="true"></i>
+            Request free Consultation
+          </a>
+        </header>
+      }
 
       <router-outlet></router-outlet>
     </div>
   `,
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
+  private readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
+  protected readonly showChrome = signal(!this.isAuthRoute(this.router.url));
+
+  constructor() {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(),
+      )
+      .subscribe((event) => {
+        this.showChrome.set(!this.isAuthRoute(event.urlAfterRedirects));
+      });
+  }
+
+  async signOut(): Promise<void> {
+    try {
+      await this.authService.signOut();
+    } finally {
+      await this.router.navigateByUrl('/', { replaceUrl: true });
+    }
+  }
+
+  displayName(user: { email?: string | null; user_metadata?: Record<string, unknown> | null }): string {
+    const metadata = user.user_metadata ?? {};
+    const fullName = typeof metadata['full_name'] === 'string' ? metadata['full_name'] : undefined;
+    const name = typeof metadata['name'] === 'string' ? metadata['name'] : undefined;
+
+    return fullName ?? name ?? user.email?.split('@')[0] ?? 'Account';
+  }
+
+  private isAuthRoute(url: string): boolean {
+    return url.startsWith('/login') || url.startsWith('/register') || url.startsWith('/auth/callback');
+  }
 }

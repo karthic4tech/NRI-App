@@ -1,0 +1,233 @@
+:host {
+  display: block;
+}
+
+.consultation-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 2.5rem;
+}
+
+.consultation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.consultation-intro,
+.consultation-card {
+  border-radius: 28px;
+}
+
+.consultation-intro {
+  padding: 2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(241, 248, 255, 0.92));
+  border: 1px solid rgba(139, 160, 196, 0.18);
+  box-shadow: 0 20px 40px rgba(23, 40, 74, 0.08);
+}
+
+.consultation-card {
+  padding: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #5c6b84;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  color: #132033;
+}
+
+.consultation-lead {
+  margin-top: 1rem;
+  color: #4d5f7a;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.consultation-highlights {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.consultation-highlight {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 20px;
+  background: rgba(248, 251, 255, 0.95);
+  border: 1px solid rgba(139, 160, 196, 0.16);
+}
+
+.consultation-highlight i {
+  color: #1f6f8b;
+  font-size: 1.15rem;
+  margin-top: 0.15rem;
+}
+
+.consultation-highlight strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.consultation-highlight p,
+.muted {
+  color: #5c6b84;
+  line-height: 1.55;
+}
+
+.consultation-card-header {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.status {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  margin-bottom: 1rem;
+}
+
+.status--success {
+  background: rgba(232, 250, 241, 0.95);
+  color: #176948;
+}
+
+.status--error {
+  background: rgba(255, 236, 242, 0.95);
+  color: #8b1f36;
+}
+
+.status i {
+  margin-top: 0.15rem;
+}
+
+.consultation-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field span {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #24344d;
+}
+
+.field input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 160, 196, 0.28);
+  background: rgba(248, 251, 255, 0.96);
+  padding: 0.9rem 1rem;
+  color: #132033;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: rgba(31, 111, 139, 0.5);
+  box-shadow: 0 0 0 4px rgba(31, 111, 139, 0.12);
+}
+
+.field input.is-invalid {
+  border-color: rgba(187, 48, 73, 0.42);
+}
+
+.field-error {
+  font-size: 0.82rem;
+  color: #bb3049;
+}
+
+.consultation-submit,
+.link-button {
+  border: 0;
+  border-radius: 16px;
+  min-height: 3.25rem;
+  padding: 0.9rem 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.consultation-submit {
+  color: #fff;
+  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
+  box-shadow: 0 16px 28px rgba(39, 130, 164, 0.22);
+}
+
+.consultation-submit:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.consultation-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.link-button {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(241, 250, 252, 0.92));
+  color: #1f6f8b;
+  border: 1px solid rgba(139, 160, 196, 0.22);
+}
+
+@media (max-width: 960px) {
+  .consultation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .consultation-shell {
+    width: min(100%, calc(100% - 1rem));
+    padding-top: 0.75rem;
+  }
+
+  .consultation-intro,
+  .consultation-card {
+    padding: 1.25rem;
+    border-radius: 22px;
+  }
+}

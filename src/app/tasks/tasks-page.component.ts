@@ -22,7 +22,7 @@ import { TaskService, type TaskRecord } from '../core/services/task.service';
         <div class="task-search-copy">
           <p class="eyebrow">Find your Task details</p>
           <h3>Search by Task ID</h3>
-          <p class="muted">Enter your Task ID to view the saved request details.</p>
+          <p class="muted">Enter your Task ID to view the saved request details from your account.</p>
         </div>
 
         <form [formGroup]="searchForm" (ngSubmit)="searchTask()" class="task-search-form">
@@ -88,17 +88,17 @@ import { TaskService, type TaskRecord } from '../core/services/task.service';
       </section>
 
       <section class="task-summary card">
-        <p class="eyebrow">Current queue</p>
-        @if (loading()) {
-          <h3>Loading tasks…</h3>
+          <p class="eyebrow">Current queue</p>
+          @if (loading()) {
+          <h3>Loading your tasks…</h3>
           <p class="muted">Fetching the latest tasks from Supabase.</p>
-        } @else if (errorMessage()) {
-          <h3>Unable to load tasks</h3>
-          <p class="muted">{{ errorMessage() }}</p>
-        } @else {
+          } @else if (errorMessage()) {
+            <h3>Unable to load tasks</h3>
+            <p class="muted">{{ errorMessage() }}</p>
+          } @else {
           <h3>Top 10 latest tasks</h3>
-          <p class="muted">Showing the newest tasks from Supabase in a grid view.</p>
-        }
+          <p class="muted">Showing the newest tasks for your signed-in account.</p>
+          }
       </section>
 
       <section class="task-list card">
