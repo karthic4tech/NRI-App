@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { AbstractControl, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -17,19 +18,13 @@ function passwordsMatch(control: AbstractControl): ValidationErrors | null {
 
 @Component({
   selector: 'app-update-password-page',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [NgOptimizedImage, ReactiveFormsModule, RouterLink],
   template: `
     <main class="auth-shell">
       <section class="auth-grid" aria-labelledby="update-password-title">
         <article class="auth-intro">
           <div class="brand-lockup">
-            <span class="brand-mark" aria-hidden="true">
-              <i class="bi bi-house-heart-fill"></i>
-            </span>
-            <div>
-              <p class="eyebrow">24/7 NRI Services</p>
-              <h2 class="h5 fw-bold mb-0">Create a new password</h2>
-            </div>
+            <img ngSrc="assets/logo/nri-services-logo.png" width="320" height="133" priority alt="24/7 NRI Services" class="brand-logo" />
           </div>
 
           <div>

@@ -43,6 +43,16 @@
   max-width: 36rem;
 }
 
+.hero-brand-lockup {
+  max-width: 28rem;
+}
+
+.hero-brand-logo {
+  display: block;
+  width: min(100%, 28rem);
+  height: auto;
+}
+
 .hero-section,
 .intro-strip,
 .service-card,
@@ -84,6 +94,29 @@
   background: linear-gradient(135deg, #f2f6ff 0%, #e4eeff 100%);
   color: var(--nri-primary);
   font-weight: 700;
+}
+
+.brand-footer {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(232, 245, 248, 0.98) 100%);
+}
+
+.brand-footer__logo {
+  display: block;
+  width: min(100%, 24rem);
+  height: auto;
+}
+
+.brand-footer__aside {
+  background: linear-gradient(180deg, rgba(39, 130, 164, 0.06), rgba(19, 184, 166, 0.04));
+}
+
+.brand-footer__panel {
+  height: 100%;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(39, 130, 164, 0.12);
+  box-shadow: 0 16px 32px rgba(23, 40, 74, 0.08);
 }
 
 .service-card {
@@ -180,5 +213,19 @@
 @media (max-width: 991.98px) {
   .hero-image {
     min-height: 18rem;
+  }
+
+  .hero-brand-lockup {
+    max-width: 24rem;
+  }
+
+  .brand-footer__aside {
+    background: transparent;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-brand-lockup {
+    max-width: 100%;
   }
 }

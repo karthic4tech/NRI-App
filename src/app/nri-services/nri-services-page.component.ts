@@ -133,6 +133,16 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
       <section class="card border-0 rounded-4 shadow-sm overflow-hidden hero-section mb-3 mb-lg-4">
         <div class="row g-0 align-items-center">
           <div class="col-lg-6 p-4 p-lg-5">
+            <div class="hero-brand-lockup mb-3">
+              <img
+                ngSrc="assets/logo/nri-services-logo.png"
+                width="620"
+                height="258"
+                priority
+                alt="24/7 NRI Services"
+                class="hero-brand-logo"
+              />
+            </div>
             <p class="eyebrow text-uppercase mb-2">Tamil Nadu-first coordination for NRIs</p>
             <h1 class="display-5 fw-bold text-navy hero-title">India Is Home. We're Here to Take Care of It.</h1>
             <p class="lead text-secondary mt-3 mb-4 hero-lead">
@@ -313,6 +323,33 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
               </article>
             </div>
           }
+        </div>
+      </section>
+
+      <section class="brand-footer card border-0 rounded-4 shadow-sm overflow-hidden mt-3 mt-lg-4">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-7 p-4 p-lg-5">
+            <img
+              ngSrc="assets/logo/nri-services-logo.png"
+              width="520"
+              height="216"
+              alt="24/7 NRI Services"
+              class="brand-footer__logo"
+            />
+            <p class="text-secondary mb-0 mt-3">
+              Your trusted partner in India for property, legal, family, and financial coordination.
+            </p>
+          </div>
+          <div class="col-lg-5 p-4 p-lg-5 brand-footer__aside">
+            <div class="brand-footer__panel">
+              <strong class="d-block text-navy mb-2">Need help now?</strong>
+              <p class="text-secondary mb-3">Use the consultation form or login to manage your requests in one place.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn nri-btn-primary" routerLink="/consultation">Free Consultation</a>
+                <a class="btn nri-btn-secondary" routerLink="/login">Login</a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

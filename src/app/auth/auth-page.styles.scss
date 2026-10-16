@@ -40,25 +40,15 @@
 }
 
 .brand-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.9rem;
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
 }
 
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 18px;
-  background: linear-gradient(180deg, #2f9aba 0%, #1f6f8b 100%);
-  color: #fff;
-  box-shadow: 0 12px 22px rgba(39, 130, 164, 0.22);
-}
-
-.brand-mark i {
-  font-size: 1.25rem;
+.brand-logo {
+  display: block;
+  width: min(20rem, 100%);
+  height: auto;
 }
 
 .eyebrow {
@@ -354,6 +344,10 @@
 
   .auth-intro {
     padding: 1.5rem;
+  }
+
+  .brand-logo {
+    width: min(16rem, 100%);
   }
 }
 

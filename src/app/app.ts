@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
@@ -7,17 +8,21 @@ import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [NgOptimizedImage, RouterLink, RouterLinkActive, RouterOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="app-shell">
       @if (showChrome()) {
         <header class="master-nav" aria-label="Primary">
           <a class="brand" routerLink="/" aria-label="24/7 NRI Services home">
-            <span class="brand-mark" aria-hidden="true">
-              <i class="bi bi-house-heart-fill"></i>
-            </span>
-            <span class="brand-text">24/7 NRI Services</span>
+            <img
+              ngSrc="assets/logo/nri-services-logo.png"
+              width="340"
+              height="141"
+              priority
+              alt="24/7 NRI Services"
+              class="brand-logo"
+            />
           </a>
 
           <nav class="master-nav-links">
@@ -37,9 +42,6 @@ import { AuthService } from './core/services/auth.service';
                   <i class="bi bi-shield-lock me-2" aria-hidden="true"></i>Admin
                 </a>
               }
-              <a routerLink="/dashboard" routerLinkActive="is-active">
-                <i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>Dashboard
-              </a>
               <span class="master-nav-user" [title]="user.email ?? 'Signed in user'">
                 <i class="bi bi-person-circle me-2" aria-hidden="true"></i>
                 {{ displayName(user) }}

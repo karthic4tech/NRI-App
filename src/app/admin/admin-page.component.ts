@@ -39,8 +39,6 @@ type DetailDrawerState =
           <h1>Tasks & Consultation Requests</h1>
           <p class="muted">Review all submitted tasks and consultation requests from one secure workspace.</p>
         </div>
-
-        <a class="secondary-link" routerLink="/dashboard">Back to dashboard</a>
       </header>
 
       @if (summaryError()) {
