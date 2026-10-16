@@ -12,7 +12,7 @@ import { AuthService } from '../core/services/auth.service';
       <section class="auth-grid" aria-labelledby="login-title">
         <article class="auth-intro">
           <div class="brand-lockup">
-            <img ngSrc="assets/logo/nri-services-logo.png" width="320" height="133" priority alt="24/7 NRI Services" class="brand-logo" />
+            <img src="/assets/logo/nri-services-logo.png" width="320" height="133" alt="24/7 NRI Services" class="brand-logo" />
           </div>
 
           <div>

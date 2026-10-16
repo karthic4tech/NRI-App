@@ -135,10 +135,9 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
           <div class="col-lg-6 p-4 p-lg-5">
             <div class="hero-brand-lockup mb-3">
               <img
-                ngSrc="assets/logo/nri-services-logo.png"
+                src="/assets/logo/nri-services-logo.png"
                 width="620"
                 height="258"
-                priority
                 alt="24/7 NRI Services"
                 class="hero-brand-logo"
               />
@@ -330,7 +329,7 @@ const HOW_IT_WORKS: readonly HowItWorksStep[] = [
         <div class="row g-0 align-items-center">
           <div class="col-lg-7 p-4 p-lg-5">
             <img
-              ngSrc="assets/logo/nri-services-logo.png"
+              src="/assets/logo/nri-services-logo.png"
               width="520"
               height="216"
               alt="24/7 NRI Services"
