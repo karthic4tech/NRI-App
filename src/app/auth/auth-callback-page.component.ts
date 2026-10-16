@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../core/services/auth.service';
 
@@ -60,17 +60,18 @@ import { AuthService } from '../core/services/auth.service';
 })
 export class AuthCallbackPageComponent implements OnInit {
   private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   protected readonly errorMessage = signal('');
 
   async ngOnInit(): Promise<void> {
-    await this.authService.waitForInitialization();
-
     try {
       const callbackUrl = typeof window !== 'undefined' ? window.location.href : '';
       const returnUrl = await this.authService.handleOAuthCallback(callbackUrl);
-      await this.router.navigateByUrl(returnUrl, { replaceUrl: true });
+
+      if (typeof window !== 'undefined') {
+        window.location.replace(returnUrl);
+        return;
+      }
     } catch (error) {
       this.errorMessage.set(error instanceof Error && error.message ? error.message : 'We could not finish signing you in.');
     }

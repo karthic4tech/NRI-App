@@ -1,2 +1,17 @@
 [functions.create-task]
 verify_jwt = false
+
+[functions.submit-consultation]
+verify_jwt = false
+
+[functions.admin-tasks]
+verify_jwt = false
+
+[functions.admin-consultations]
+verify_jwt = false
+
+[functions.admin-summary]
+verify_jwt = false
+
+[functions.promote-admin-user]
+verify_jwt = false

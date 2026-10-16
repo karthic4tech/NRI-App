@@ -27,6 +27,7 @@ export class AuthService {
   readonly session = this.sessionSignal.asReadonly();
   readonly user = computed(() => this.sessionSignal()?.user ?? null);
   readonly isAuthenticated = computed(() => this.user() !== null);
+  readonly isAdmin = computed(() => this.hasAdminAccess(this.user()));
   readonly loading = computed(() => !this.readySignal());
   readonly ready = this.readySignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
@@ -115,6 +116,28 @@ export class AuthService {
     return data.session;
   }
 
+  async sendPasswordResetEmail(email: string): Promise<void> {
+    this.errorSignal.set(null);
+
+    const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: this.buildCallbackUrl('/auth/update-password'),
+    });
+
+    if (error) {
+      throw error;
+    }
+  }
+
+  async updatePassword(password: string): Promise<void> {
+    this.errorSignal.set(null);
+
+    const { error } = await this.supabase.auth.updateUser({ password });
+
+    if (error) {
+      throw error;
+    }
+  }
+
   async handleOAuthCallback(callbackUrl: string): Promise<string> {
     const parsedUrl = new URL(callbackUrl);
     const callbackError = parsedUrl.searchParams.get('error_description') ?? parsedUrl.searchParams.get('error');
@@ -168,6 +191,21 @@ export class AuthService {
     this.errorSignal.set(null);
   }
 
+  private hasAdminAccess(user: User | null): boolean {
+    if (!user) {
+      return false;
+    }
+
+    if (environment.adminEmails?.includes(user.email ?? '')) {
+      return true;
+    }
+
+    const appMetadata = isRecord(user.app_metadata) ? user.app_metadata : {};
+    const userMetadata = isRecord(user.user_metadata) ? user.user_metadata : {};
+
+    return hasAdminFlag(appMetadata) || hasAdminFlag(userMetadata);
+  }
+
   private buildCallbackUrl(returnUrl?: string): string {
     const callbackUrl = new URL('/auth/callback', this.getAppOrigin());
 
@@ -217,4 +255,21 @@ export class AuthService {
 
     return 'http://localhost:4200';
   }
+}
+
+function hasAdminFlag(metadata: Record<string, unknown>): boolean {
+  if (metadata['is_admin'] === true) {
+    return true;
+  }
+
+  if (metadata['role'] === 'admin') {
+    return true;
+  }
+
+  const roles = metadata['roles'];
+  return Array.isArray(roles) && roles.some((role) => role === 'admin');
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

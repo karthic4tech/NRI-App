@@ -44,6 +44,8 @@ The app uses `/auth/callback` to finish the OAuth flow and restore the session a
 
 ## Free consultation submissions
 
+The consultation form submits through the Supabase Edge Function `submit-consultation`, which writes to `public.consultation_requests` using the service-role key.
+
 Suggested Supabase table name: `consultation_requests`
 
 Create a table like this in Supabase SQL Editor:
@@ -67,7 +69,7 @@ to anon, authenticated
 with check (true);
 ```
 
-If you want only logged-in users to submit requests, remove `anon` from the policy and require login before submission.
+If you ever switch to direct browser inserts again, keep the policy above. It is not required for the Edge Function path.
 
 ## Task creation for logged-in users
 
@@ -131,6 +133,22 @@ The `create-task` edge function should:
 - return only tasks owned by that user when listing or searching
 
 That keeps each user's task data separated even when the function runs with a service-role key.
+
+## Admin module
+
+The app now includes an admin area at `/admin` that reads tasks and consultation requests through Supabase Edge Functions:
+
+- `admin-summary`
+- `admin-tasks`
+- `admin-consultations`
+
+Admin access is controlled by the user's Supabase metadata. Set one of these in the user's `app_metadata`:
+
+- `is_admin: true`
+- `role: "admin"`
+- `roles: ["admin"]`
+
+The Edge Functions require a logged-in user and deny access unless the metadata marks the user as an admin.
 
 ## Local development
 

@@ -32,6 +32,11 @@ import { AuthService } from './core/services/auth.service';
             </a>
 
             @if (authService.user(); as user) {
+              @if (authService.isAdmin()) {
+                <a routerLink="/admin" routerLinkActive="is-active">
+                  <i class="bi bi-shield-lock me-2" aria-hidden="true"></i>Admin
+                </a>
+              }
               <a routerLink="/dashboard" routerLinkActive="is-active">
                 <i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>Dashboard
               </a>
