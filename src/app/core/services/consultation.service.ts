@@ -53,7 +53,7 @@ export class ConsultationService {
 
     const record = payload as {
       id?: number;
-      name: string;
+      name?: string;
       phone_number: string;
       city: string;
       country: string;
@@ -62,10 +62,10 @@ export class ConsultationService {
 
     return {
       id: record.id ?? Date.now(),
-      name: record.name,
-      phoneNumber: record.phone_number,
-      city: record.city,
-      country: record.country,
+      name: record.name?.trim() || normalized.name,
+      phoneNumber: record.phone_number?.trim() || normalized.phoneNumber,
+      city: record.city?.trim() || normalized.city,
+      country: record.country?.trim() || normalized.country,
       created_at: record.created_at ?? new Date().toISOString(),
     };
   }

@@ -156,7 +156,7 @@ export class ConsultationPageComponent implements OnInit {
         country: value.country,
       });
 
-      this.successMessage.set(`Thanks ${record.name}! We received your request and will contact you soon.`);
+      this.successMessage.set(`Thanks ${record.name || value.name}! We received your request and will contact you soon.`);
       this.consultationForm.reset();
     } catch (error) {
       this.errorMessage.set(error instanceof Error && error.message ? error.message : 'Please try again in a moment.');
